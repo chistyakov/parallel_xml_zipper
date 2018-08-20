@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
 
 
-cd xml_zipper/src
+cd ./xml_zipper/src
 
 if [ "$1" = "tests" ]
 then
   echo "run tests"
+  python -m pytest ../tests/ -vv
 fi
 
 if [ "$1" = "generate" ]
