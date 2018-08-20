@@ -12,6 +12,7 @@ fi
 if [ "$1" = "generate" ]
 then
   echo "run generator"
+  python -m xml_zipper.main --dirpath /data
 fi
 
 if [ "$1" = "analyze" ]

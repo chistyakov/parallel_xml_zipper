@@ -1,6 +1,7 @@
 import random
 import string
 import xml.etree.ElementTree as et
+from logging import getLogger
 from uuid import uuid4
 from zipfile import ZipFile
 
@@ -15,14 +16,15 @@ MAX_OBJECTS_COUNT = 10
 OBJECT_NAME_LENGTH = 5
 
 
-def generate(path: str) -> None:
+def generate(dirpath: str) -> None:
+    getLogger(__name__).info("generate zip files in directory %s", dirpath)
     for i in range(ZIP_COUNT):
         start = i * XML_COUNT + 1
         stop = start + XML_COUNT - 1
-        generate_zip(path, start, stop)
+        generate_single_zip(dirpath, start, stop)
 
 
-def generate_zip(dirpath: str, start: int, stop: int) -> None:
+def generate_single_zip(dirpath: str, start: int, stop: int) -> None:
     with ZipFile(f"{dirpath}/{start}_{stop}.zip", "w") as zip_with_xml:
         for i in range(start, stop + 1):
             zip_with_xml.writestr(f"{i}.xml", generate_xml())
