@@ -1,18 +1,18 @@
 from unittest import mock
 
-import xml_zipper.generator as g
+import xml_zipper.generator.xml as g
 
 
-@mock.patch("xml_zipper.generator.generate_objects_count")
-@mock.patch("xml_zipper.generator.generate_name", return_value="foo")
-@mock.patch("xml_zipper.generator.generate_level", return_value="1")
+@mock.patch("xml_zipper.generator.xml.primitives.objects_count", return_value=1)
+@mock.patch("xml_zipper.generator.xml.primitives.name", return_value="foo")
+@mock.patch("xml_zipper.generator.xml.primitives.level", return_value="1")
 @mock.patch(
-    "xml_zipper.generator.generate_id",
+    "xml_zipper.generator.xml.primitives.id_",
     return_value="bd2ca695-346d-467e-a061-51eb405f4954",
 )
-def test_generate_xml_with_1_objects(mock_id, mock_level, mock_name, mock_count):
-    xml_ = g.generate_xml()
-    assert xml_ == (
+def test_generate_doc_with_1_object(mock_id, mock_level, mock_name, mock_count):
+    doc = g.document()
+    assert doc == (
         "<root>"
         '<var name="id" value="bd2ca695-346d-467e-a061-51eb405f4954" />'
         '<var name="level" value="1" />'
@@ -23,17 +23,17 @@ def test_generate_xml_with_1_objects(mock_id, mock_level, mock_name, mock_count)
     )
 
 
-@mock.patch("xml_zipper.generator.generate_objects_count", return_value=3)
-@mock.patch("xml_zipper.generator.generate_name")
-@mock.patch("xml_zipper.generator.generate_level", return_value="1")
+@mock.patch("xml_zipper.generator.xml.primitives.objects_count", return_value=3)
+@mock.patch("xml_zipper.generator.xml.primitives.name", return_value="foo")
+@mock.patch("xml_zipper.generator.xml.primitives.level", return_value="1")
 @mock.patch(
-    "xml_zipper.generator.generate_id",
+    "xml_zipper.generator.xml.primitives.id_",
     return_value="bd2ca695-346d-467e-a061-51eb405f4954",
 )
 def test_generate_xml_with_3_objects(mock_id, mock_level, mock_name, mock_count):
     mock_name.side_effect = ["foo", "bar", "baz"]
-    xml_ = g.generate_xml()
-    assert xml_ == (
+    doc = g.document()
+    assert doc == (
         "<root>"
         '<var name="id" value="bd2ca695-346d-467e-a061-51eb405f4954" />'
         '<var name="level" value="1" />'
