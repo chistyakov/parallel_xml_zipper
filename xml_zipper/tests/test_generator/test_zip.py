@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as et
 from zipfile import ZipFile
-
+from unittest import mock
 import xml_zipper.generator.zip as g
 
 
@@ -22,14 +22,15 @@ def test_single_zip_with_correct_xml(tmpdir):
     with ZipFile(str(zip_1_100_path), "r") as z:
         with z.open("1.xml", "r") as xml_1_f:
             root = et.fromstring(xml_1_f.read())
-            # more checks in unittests for the generate_xml
+            # there are more checks in tests for building of the document
             assert root.tag == "root"
             assert root[0].attrib["name"] == "id"
             assert root[1].attrib["name"] == "level"
             assert root[2].tag == "objects"
 
 
-def test_bunch_of_zip_creates_files(tmpdir):
+@mock.patch("xml_zipper.generator.zip.ZipFile.writestr")
+def test_bunch_of_zip_creates_files(mock_writestr, tmpdir):
     g.bunch_of_zip(dirpath=str(tmpdir))
     zip_list = [fpath.basename for fpath in tmpdir.listdir()]
     assert "1_100.zip" in zip_list
