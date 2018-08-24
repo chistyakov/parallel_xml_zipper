@@ -30,8 +30,8 @@ def test_single_zip_with_correct_xml(tmpdir):
 
 
 @mock.patch("xml_zipper.generator.zip.ZipFile.writestr")
-def test_bunch_of_zip_creates_files(mock_writestr, tmpdir):
-    g.bunch_of_zip(dirpath=str(tmpdir))
+def test_bunch_zip_creates_files(mock_writestr, tmpdir):
+    g.bunch_zip(dirpath=str(tmpdir))
     zip_list = [fpath.basename for fpath in tmpdir.listdir()]
     assert "1_100.zip" in zip_list
     assert "4901_5000.zip" in zip_list

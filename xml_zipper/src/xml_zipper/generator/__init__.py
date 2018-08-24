@@ -1,1 +1,1 @@
-from .zip import bunch_of_zip as generate
+from xml_zipper.generator.zip import bunch_zip as generate

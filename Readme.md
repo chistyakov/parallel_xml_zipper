@@ -29,14 +29,12 @@
 
 ## How to run
 ```shell
-docker build . -t xml_zipper
-
 # launch zip-files generator:
-docker run --rm --name xml_zipper -v $(pwd)/data:/data --user=$(id -u) xml_zipper generate
+make generate
 
 # launch zip-files analyzer:
-docker run --rm --name xml_zipper -v $(pwd)/data:/data xml_zipper analyze
+make analyze
 
 # launch tests:
-docker run --rm --name xml_zipper xml_zipper tests
+make tests
 ```

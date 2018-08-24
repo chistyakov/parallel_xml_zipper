@@ -1,13 +1,13 @@
 from logging import getLogger
 from zipfile import ZipFile
 
-from xml_zipper.generator.xml import document
+from xml_zipper.generator.document import document
 
 ZIP_COUNT = 50
 XML_COUNT = 100
 
 
-def bunch_of_zip(dirpath: str) -> None:
+def bunch_zip(dirpath: str) -> None:
     getLogger(__name__).info(
         "generate %s zip files in the directory %s", ZIP_COUNT, dirpath
     )
