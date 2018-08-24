@@ -5,13 +5,10 @@ from typing import List, Iterable, Tuple, TextIO
 from xml_zipper.analyzer.document import Meta
 from xml_zipper.analyzer.unzip import bunch_unzip
 
-LEVELS_RESULTS_FILENAME = "levels.csv"
-NAMES_RESULTS_FILENAME = "object_names.csv"
-
 
 def save_meta(dirpath: str) -> None:
-    levels_filename = os.path.join(dirpath, LEVELS_RESULTS_FILENAME)
-    names_filename = os.path.join(dirpath, NAMES_RESULTS_FILENAME)
+    levels_filename = os.path.join(dirpath, os.environ["LEVELS_FILENAME"])
+    names_filename = os.path.join(dirpath, os.environ["NAMES_FILENAME"])
     with open(levels_filename, "w") as levels_f, open(names_filename, "w") as names_f:
         for meta_list in bunch_unzip(dirpath):
             flash(meta_list, levels_f, names_f)

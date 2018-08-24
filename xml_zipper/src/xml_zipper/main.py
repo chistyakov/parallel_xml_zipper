@@ -2,8 +2,8 @@ import argparse
 import logging
 from argparse import Namespace
 
-from xml_zipper.generator import generate
 from xml_zipper.analyzer import analyze
+from xml_zipper.generator import generate
 
 
 def main() -> None:
