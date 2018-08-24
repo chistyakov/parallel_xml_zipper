@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as et
+import lxml.etree as et
 
 import xml_zipper.generator.primitives as primitives
 

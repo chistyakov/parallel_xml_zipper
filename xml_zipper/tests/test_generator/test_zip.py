@@ -1,6 +1,8 @@
-import xml.etree.ElementTree as et
-from zipfile import ZipFile
 from unittest import mock
+from zipfile import ZipFile
+
+import lxml.etree as et
+
 import xml_zipper.generator.zip as g
 
 
